@@ -1,0 +1,61 @@
+# ==========================================================
+# Credentials, secrets, and API keys — NEVER commit these
+# ==========================================================
+.env
+.env.*
+!.env.example
+*credentials*
+*secret*
+*secrets*
+*.key
+*.pem
+*.p12
+*.pfx
+*token*
+*api_key*
+*apikey*
+
+# ==========================================================
+# n8n local configuration, database, and runtime data
+# ==========================================================
+.n8n/
+n8n_data/
+*.sqlite
+*.sqlite3
+config.json
+.n8n-webhooks/
+
+# ==========================================================
+# Logs
+# ==========================================================
+*.log
+logs/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# ==========================================================
+# Temporary / cache files
+# ==========================================================
+*.tmp
+*.temp
+*.bak
+*.swp
+*~
+.cache/
+tmp/
+temp/
+
+# ==========================================================
+# OS / editor junk
+# ==========================================================
+.DS_Store
+Thumbs.db
+desktop.ini
+.vscode/
+.idea/
+
+# ==========================================================
+# Dependencies (if any Node tooling is added later)
+# ==========================================================
+node_modules/
