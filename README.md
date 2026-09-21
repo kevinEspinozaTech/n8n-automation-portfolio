@@ -30,6 +30,9 @@ The repository is expected to evolve over time: early folders will contain simpl
 │   ├── 02-personal-projects/# Independent, self-directed automations
 │   └── 03-portfolio-projects/ # Polished, portfolio-ready automations
 ├── docs/                    # Notes, guides, and project documentation
+│   ├── stage-01-business-case.md
+│   └── stage-02-data-preparation.md
+├── sql/                     # SQL scripts (added in Stage 2 — see below)
 ├── templates/                # Reusable workflow templates and boilerplates
 ├── .gitignore
 └── README.md
@@ -45,7 +48,18 @@ This is where exported n8n workflow JSON files live, organized by maturity:
 
 ### `docs/`
 
-Reference notes, setup guides, architecture explanations, and any written documentation that supports the workflows in this repository.
+Reference notes, setup guides, architecture explanations, and any written documentation that supports the workflows in this repository. As of Stage 2, this includes one documentation/log file per stage (see "Development Approach" below): `stage-01-business-case.md` and `stage-02-data-preparation.md`.
+
+### `sql/`
+
+Added in Stage 2. Contains the project's SQL scripts — currently BigQuery SQL written against the `bigquery-public-data.thelook_ecommerce` public dataset, used for data-quality validation and analysis (Project 01, Stage 2 — Data Preparation & Analytical Validation):
+
+- `01_data_quality_validation.sql` — referential integrity, order-item-count consistency, status/date consistency, chronological validation.
+- `02_financial_validation.sql` — sale price and inventory cost validation, financial recognition rules, financial baseline.
+- `03_monthly_performance_analysis.sql` — monthly financial aggregation, MoM/YoY growth, profitability trend.
+- `04_category_performance_analysis.sql` — category financial/operational performance, Min-Max normalization, multi-scenario sensitivity analysis, and robustness-based category classification.
+
+See `docs/stage-02-data-preparation.md` for the full analytical documentation and findings behind these queries.
 
 ### `templates/`
 
@@ -53,7 +67,7 @@ Reusable workflow skeletons, starter nodes, and boilerplate patterns that can be
 
 ## Planned Architecture (Future Stages)
 
-The structure above reflects the **current state of the repository only**. As the project grows beyond n8n into a broader data/BI/automation/AI portfolio, the following will be added — **one folder at a time, only when the stage that needs it begins**, not in advance:
+The structure above (Folder Structure) reflects the **current state of the repository**, including what Stage 2 has added so far (`sql/`, and the `docs/stage-01-*.md` / `docs/stage-02-*.md` files). As the project grows beyond n8n into a broader data/BI/automation/AI portfolio, the following will still be added — **one folder at a time, only when the stage that needs it begins**, not in advance:
 
 ```
 data/
@@ -63,17 +77,13 @@ data/
 │                 # presented as real
 └── processed/    # Cleaned/transformed output derived from raw + synthetic
 
-sql/              # SQL Server scripts and queries
 notebooks/        # Jupyter notebooks (Python analysis)
 powerbi/          # Power BI files and related assets
 content/          # AI-generated content artifacts (later stages)
 results/          # Outputs, findings, and performance metrics
-
-docs/
-└── stage-XX-short-name.md   # One documentation/log file per stage
 ```
 
-None of these folders or files exist in the repository yet.
+None of these remaining folders exist in the repository yet.
 
 ## Development Approach — Stage-Based Workflow
 
@@ -94,7 +104,7 @@ Starting with Stage 1, each stage gets a single file at `docs/stage-XX-short-nam
 - Stage Validation
 - Stage Log
 
-Sections are filled in progressively as each stage advances rather than all at once. No `docs/stage-XX-*.md` file exists yet — the first is created when Stage 1 begins.
+Sections are filled in progressively as each stage advances rather than all at once. Two such files exist so far: `docs/stage-01-business-case.md` (Stage 1, complete) and `docs/stage-02-data-preparation.md` (Stage 2, complete).
 
 ## ⚠️ Security: Credentials and Secrets
 
@@ -110,4 +120,4 @@ If a secret is ever accidentally committed, treat it as compromised: revoke/rota
 
 ## Status
 
-🚧 Stage 0 (Environment Setup) is complete. The repository is being prepared for Stage 1 (Business Case & Data Acquisition). Expect the structure and contents to evolve incrementally, one stage at a time, as skills and projects mature.
+✅ Stage 0 (Environment Setup) is complete. ✅ Stage 1 (Business Case & Data Acquisition) is complete — the primary dataset (TheLook eCommerce) was selected through a documented evaluation and gap analysis. ✅ Stage 2 (Data Preparation & Analytical Validation) is complete (closed 2026-09-21) — see `docs/stage-02-data-preparation.md` for the full validation, Category Decision Model, and SQL consolidation record. 🚧 Stage 3 is next. Expect the structure and contents to evolve incrementally, one stage at a time, as skills and projects mature.
